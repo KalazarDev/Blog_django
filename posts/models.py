@@ -4,7 +4,7 @@ from categorias.models import Categoria
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-class post(models.Model):
+class Post(models.Model):
     titulo_post = models.CharField(max_length=255, verbose_name='Titulo')
     autor_post = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name="Autor")
     data_post = models.DateTimeField(default=timezone.now, verbose_name="Data")

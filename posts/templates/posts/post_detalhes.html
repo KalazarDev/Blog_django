@@ -1,5 +1,5 @@
 {%extends 'base.html'%}
-{%block titulo %}{{post.titulo_post!title}} | Categoria | {%endblock%}
+{%block titulo %}{{post.titulo_post|title}} | Categoria | {%endblock%}
 
 {% block conteudo %}
  <!-- POST -->
@@ -69,8 +69,13 @@
                 {% endfor %}
 
                 {% for visible_field in form.visible_fields %}
-                {{ hidden_visible }}
-            {% endfor %}
+                <div class="form-group">
+
+                    {{ visible_field.label_tag}} <br>
+                    {{ visible_field.errors}}
+                    {{ visible_field }}
+                </div>
+                {% endfor %}
 
                 {% include 'parciais/_messages.html' %}
                 <input id="envia_comentario" type="submit" class="btn btn-primary"

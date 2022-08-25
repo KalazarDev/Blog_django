@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from .models import Post
@@ -6,6 +6,7 @@ from django.db.models import Q, Count, Case, When
 from comentarios.forms import FormComentario
 from comentarios.models import Comentario
 from django.contrib import messages
+from django.views import View
 
 class PostIndex(ListView):
     model = Post
@@ -74,11 +75,10 @@ class PostDetalhes(UpdateView):
         post = self.get_object()
         comentarios = Comentario.objects.filter(publicado_comentario=True, post_comentario=post.id)
         contexto['comentarios'] = comentarios
-        
-        
-        
         return contexto
     
+    
+
     def form_valid(self, form):
         post = self.get_object()
         comentario =  Comentario(**form.cleaned_data)
